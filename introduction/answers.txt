@@ -1,0 +1,68 @@
+1. 
+    1. text
+    2. int
+    3. date
+    4. float
+    5. varchar
+
+2. A database might be used when there is a loarge collection of data and/or when
+multiple applications are trying to access that data. Text files are good when
+only a single application accesses it at a time such as configuration files for
+a video game.
+
+3. SQL is declarative, so we just tell the database what we want without worrying
+about how the database engine is going to retrieve it.
+
+4. The database language lets us talk to the database engine through queries, and
+the engine can read, manipulate, or remove data from the database depending on the
+queries we send it.
+
+5. A table is the structure that relational databases use to lay out the data. Each
+table contains the data in rows and columns. Each column contains one type of data
+and the column name describes what the data represents. Each row makes up a complete
+conceptual unit, sort of like multiple instances of a class from other programming
+languages. Values sit at the intersections of rows and columns and they are the
+actual data that the column name describes.
+
+6.
+    1. text
+    2. float
+    3. date
+
+7. 
+The first query SELECTs the date and amount columns from the payments table. It returns
+a table with all of the data under those two columns.
+
+The second query selects all of the amount data in the payments table that is greater
+than 500. It returns a table with only one cell because only one value under amount
+exists that is greater than 500.
+
+The last query selects all columns in the payments table where the payee is eqal to
+'Mega Foods'. The payments table conains only one such payee so it returns a table
+with one row and all 4 columns.
+
+8. 
+SELECT email, signup
+FROM users
+WHERE name = 'DeAndre Data';
+
+email 	            signup
+datad@comcast.net 	2008-01-20T00:00:00.000Z
+
+___________________________________________________
+
+SELECT userid
+FROM users
+WHERE email = 'aleesia.algorithm@ue.edu';
+
+userid
+1
+
+___________________________________________________
+
+SELECT *
+FROM users
+WHERE userid = 4;
+
+userid 	 name 	          email 	            signup
+4 	     Brandy Boolean 	bboolean@nasa.gov 	1999-10-15T00:00:00.000Z
