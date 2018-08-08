@@ -46,8 +46,8 @@ SELECT email, signup
 FROM users
 WHERE name = 'DeAndre Data';
 
-email 	            signup
-datad@comcast.net 	2008-01-20T00:00:00.000Z
+email               signup
+datad@comcast.net   2008-01-20T00:00:00.000Z
 
 ___________________________________________________
 
@@ -64,5 +64,5 @@ SELECT *
 FROM users
 WHERE userid = 4;
 
-userid 	 name 	          email 	            signup
-4 	     Brandy Boolean 	bboolean@nasa.gov 	1999-10-15T00:00:00.000Z
+userid   name             email               signup
+4        Brandy Boolean   bboolean@nasa.gov   1999-10-15T00:00:00.000Z
