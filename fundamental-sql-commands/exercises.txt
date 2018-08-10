@@ -1,0 +1,29 @@
+1.
+    INSERT
+    UPDATE
+    DELETE
+
+2.
+  INSERT:
+    INSERT INTO table_name (column, names, here) VALUES (values, go, here);
+  
+  UPDATE:
+    UPDATE table_name SET column=value WHERE column=value;
+
+  DELETE:
+    DELETE FROM table_name WHERE column=value;
+
+3. There are around 40 data types available to use. Examples:
+      int: Can be used to track the quantity of something.
+
+      date: Store a date like a wedding day.
+
+      text: Store text like the body of a blog post.
+
+4. Commands in wedding.sql
+
+5. Commands in library.sql
+
+6. Commands in spacecraft.sql
+
+7. Commands in email.sql
