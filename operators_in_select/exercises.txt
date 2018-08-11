@@ -1,0 +1,94 @@
+1.
+    SELECT column_name FROM table_name WHERE conditional_goes_here;
+
+2.
+    1. FROM         Father
+    2. WHERE        William
+    3. GROUP BY     Gets
+    4. HAVING       Happy
+    5. SELECT       Selling
+    6. ORDER BY     Oracles
+  
+3.
+    * SELECT name, gender, age
+      FROM dogs
+      WHERE breed LIKE '%labrador%';
+
+    * SELECT id
+      FROM dogs
+      WHERE age < 1;
+
+    * SELECT name, age
+      FROM dogs
+      WHERE gender='F' AND weight > 35;
+
+    * SELECT *
+      FROM dogs
+      WHERE breed NOT LIKE '%shepherd%';
+
+    * SELECT id, age, weight, breed
+      FROM dogs
+      WHERE weight > 60 OR breed = 'great dane';
+
+4.
+  a)
+    name         adoption_date
+    Mushi        2016-03-22T00:00:00.000Z
+    Seashell     null
+    Azul         2016-04-17T00:00:00.000Z
+    Victoire     2016-09-01T00:00:00.000Z
+    Nala         null
+
+  b)
+    name          age
+    Mushi         1
+    Seashell      7
+    Azul          3
+    Victoire      7
+    Nala          1
+
+5.
+    * SELECT * FROM cats;
+
+    * SELECT name, gender
+      FROM cats
+      WHERE age = 7;
+
+    * SELECT name FROM cats;
+
+6.
+    < - Check when item to the left is less than item to the right.
+          WHERE BMI < 18.5
+
+    <= - Check when item to the left is less than or equal to item to the right.
+          WHERE HP <= 100
+
+    > - Check when item to the left is greater than item to the right.
+          WHERE length > 10
+
+    >= - Check when item to the left is greater than or equal to item to the right.
+          WHERE age >= 21
+
+    = - Check when item to the left is equal to item to the right.
+          WHERE id = 123
+
+    != - Check when item to the left is not equal to item to the right
+          WHERE the_truth != false
+
+7.
+  a)
+    name
+    Seashell
+    Nala
+
+  b)
+    name
+    Mushi
+    Seashell
+    Victoire
+    Nala
+
+  c)
+    id
+    3
+    4
