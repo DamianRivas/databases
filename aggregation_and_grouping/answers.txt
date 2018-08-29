@@ -1,0 +1,163 @@
+1.
+    1. SUM - Sums the values for the passed in column
+        SUM(prices)
+
+    2. AVG - Calculates the average of the values for the passed in column
+        AVG(ages)
+
+    3. COUNT - Counts the number of values for the passed in column
+        COUNT(*) FROM people
+
+    4. MAX - Grabs the max value for the passed in column
+        MAX(id)
+
+    5. MIN - Grabs the minimum value for the passed in column
+        MIN(height)
+
+2.
+    a.
+      SELECT SUM(amount)
+      FROM donations;
+
+      Output:
+
+      sum
+      993.0000
+
+    b.
+      SELECT donor, SUM(amount)
+      FROM donations
+      GROUP BY donor;
+
+      Output:
+
+      donor       sum
+      Samwell     20.0000
+      Daario      10.0000
+      Brienne     75.0000
+      Tyrion      120.0000
+      Petyr       70.0000
+      Melisandre  45.0000
+      Bran        25.0000
+      Tormund     50.0000
+      Ygritte     30.0000
+      Gilly       7.0000
+      Jon         25.0000
+      Arya        60.0000
+      Theon       20.0000
+      Bronn       20.0000
+      Margaery    120.0000
+      Missandei   90.0000
+      Sansa       33.0000
+      Daenerys    173.0000
+
+    c.
+      SELECT donor, AVG(amount)
+      FROM donations
+      GROUP BY donor;
+
+      Output:
+
+      | donor      | avg                  |
+      | ---------- | -------------------- |
+      | Samwell    | 20.0000000000000000  |
+      | Daario     | 10.0000000000000000  |
+      | Brienne    | 75.0000000000000000  |
+      | Tyrion     | 40.0000000000000000  |
+      | Petyr      | 70.0000000000000000  |
+      | Melisandre | 45.0000000000000000  |
+      | Bran       | 25.0000000000000000  |
+      | Tormund    | 50.0000000000000000  |
+      | Ygritte    | 30.0000000000000000  |
+      | Gilly      | 7.0000000000000000   |
+      | Jon        | 25.0000000000000000  |
+      | Arya       | 20.0000000000000000  |
+      | Theon      | 10.0000000000000000  |
+      | Bronn      | 20.0000000000000000  |
+      | Margaery   | 120.0000000000000000 |
+      | Missandei  | 22.5000000000000000  |
+      | Sansa      | 33.0000000000000000  |
+      | Daenerys   | 86.5000000000000000  |
+
+    d.
+      SELECT COUNT(amount)
+      FROM donations
+      WHERE amount > 100;
+
+      Output:
+
+      count
+      2
+
+    e.
+      SELECT donor, MAX(amount) AS max_amount
+      FROM donations
+      GROUP BY donor
+      ORDER BY max_amount DESC LIMIT 1;
+
+      Output:
+
+      | donor    | max_amount |
+      | -------- | ---------- |
+      | Margaery | 120.0000   |
+
+    f.
+      SELECT MIN(amount)
+      FROM donations;
+
+      Output:
+
+      | min    |
+      | ------ |
+      | 5.0000 |
+
+3.
+
+    I would use the ORDER BY grouping clause combined with ASC or DESC
+
+4.
+    If I wanted to get a list of all users that signed up after the 1000th user I
+    can sort them by id and use an OFFSET of 1000.
+
+5.
+    You want to use ORDER BY because if you don't you won't really know what results
+    to expect since you don't know how they will be ordered when you retrieve them.
+
+6.
+    HAVING is different to WHERE because it comes after the GROUP BY clause. It's a way
+    to set additional conditions on the data after grouping.
+
+7.
+    SELECT id, SUM(amount) AS amount_sum
+    FROM payment
+    GROUP BY id
+    HAVING amount_sum > 200;
+
+8.
+  a.
+    SELECT *
+    FROM cats
+    ORDER BY intake_date;
+
+  b.
+    SELECT *
+    FROM adoptions
+    ORDER BY date DESC LIMIT 5;
+
+  c.
+    SELECT *
+    FROM cats
+    WHERE gender = 'F' AND age > 2
+    ORDER BY age;
+
+  d.
+    SELECT donor, SUM(amount) AS amount_sum
+    FROM donations
+    GROUP BY donor
+    ORDER BY amount_sum DESC LIMIT 5;
+
+  e.
+    SELECT donor, SUM(amount) AS amount_sum
+    FROM donations
+    GROUP BY donor
+    ORDER BY amount_sum DESC OFFSET 5 LIMIT 10;
