@@ -1,0 +1,64 @@
+1.
+    With a JOIN statement.
+
+
+2.
+    Cross JOIN
+      It returns every combination of rows between tables.
+        Example:
+        You want every combination of exterior and interior features on a new car.
+
+    INNER JOIN
+      It returns a row for every match in the join condition between the tables.
+        Example:
+        You want a list of all employees and their job titles.
+
+    LEFT OUTER JOIN
+      Like an INNER JOIN except where the first table does not match the join condition it will contain null instead.
+        Example:
+          You want a list of all job titles whether or not an employee currently has it
+
+    RIGHT OUTER JOIN
+      Like an INNER JOIN except where the other table does not match the join condition it will contain null instead.
+        Example:
+          You want a list of all employees whether or not they currently have a job title.
+
+    FULL OUTER JOIN
+      It combines a LEFT OUTER JOIN and RIGHT OUTER JOIN, putting null where ever the join condition is not met.
+      Example:
+        You want a list of all employees and all job titles to see what job titles an employee can take.
+
+
+3.
+    The primary key is a unique identifier which exists only once in a table.
+
+    When a primary key is referenced in a different table it is then called a foreign key.
+
+
+4.
+    Aliasing is when you abbreviate something or rewname it. Sort of like defining a variable within a query.
+
+
+5.
+    SELECT professor.name, compensation.salary, compensation.vacation_days
+    FROM professor AS p
+    JOIN compensation AS c
+    ON p.id = c.professor_id;
+
+
+6.
+    NATURAL is shorhand for USING. It uses the USING keyword and automatically forms a table only with the columns
+    that appear in both tables. Each unique column is only showed once.
+      Example:
+      You want a list of all employees and their job roles and only want the job role id
+      to show once.
+
+
+7.
+    Answers in shifts.txt
+
+8.
+    Answers in adoption.txt
+
+9.
+    Answers in library.txt

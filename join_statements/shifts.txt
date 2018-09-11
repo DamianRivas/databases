@@ -1,0 +1,36 @@
+SELECT employees.name, shifts.date, shifts.start_time, shifts.end_time
+FROM employees
+JOIN scheduled_shifts
+ON employees.id = scheduled_shifts.employee_id
+RIGHT OUTER JOIN shifts
+ON shifts.id = scheduled_shifts.shift_id;
+
+OUTPUT:
+
+| name             | date       | start_time | end_time |
+| ---------------- | ---------- | ---------- | -------- |
+| Hermione Granger | 1998-03-09 | 08:00:00   | 16:00:00 |
+| Hermione Granger | 1998-03-10 | 08:00:00   | 16:00:00 |
+| Hermione Granger | 1998-03-11 | 08:00:00   | 16:00:00 |
+| Hermione Granger | 1998-03-12 | 08:00:00   | 16:00:00 |
+| Hermione Granger | 1998-03-13 | 08:00:00   | 16:00:00 |
+| Ronald Weasley   | 1998-03-10 | 12:00:00   | 16:00:00 |
+| Ronald Weasley   | 1998-03-12 | 12:00:00   | 16:00:00 |
+| Luna Lovegood    | 1998-03-09 | 12:00:00   | 16:00:00 |
+| Luna Lovegood    | 1998-03-11 | 12:00:00   | 16:00:00 |
+| Luna Lovegood    | 1998-03-13 | 12:00:00   | 16:00:00 |
+| Draco Malfoy     | 1998-03-11 | 16:00:00   | 20:00:00 |
+| Draco Malfoy     | 1998-03-12 | 16:00:00   | 20:00:00 |
+| Draco Malfoy     | 1998-03-13 | 16:00:00   | 20:00:00 |
+| Padma Patil      | 1998-03-09 | 12:00:00   | 20:00:00 |
+| Padma Patil      | 1998-03-10 | 12:00:00   | 20:00:00 |
+| Padma Patil      | 1998-03-11 | 12:00:00   | 20:00:00 |
+| Padma Patil      | 1998-03-09 | 08:00:00   | 12:00:00 |
+| Padma Patil      | 1998-03-10 | 08:00:00   | 12:00:00 |
+| Padma Patil      | 1998-03-11 | 08:00:00   | 12:00:00 |
+| Cho Chang        | 1998-03-12 | 12:00:00   | 20:00:00 |
+| Cho Chang        | 1998-03-13 | 12:00:00   | 20:00:00 |
+| Dean Thomas      | 1998-03-09 | 16:00:00   | 20:00:00 |
+| Dean Thomas      | 1998-03-10 | 16:00:00   | 20:00:00 |
+|                  | 1998-03-13 | 08:00:00   | 12:00:00 |
+|                  | 1998-03-12 | 08:00:00   | 12:00:00 |

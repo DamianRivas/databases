@@ -1,0 +1,119 @@
+1.
+    SELECT volunteers.first_name, volunteers.last_name, dogs.breed, dogs.name
+    FROM volunteers
+    LEFT OUTER JOIN dogs
+    ON volunteers.foster_dog_id = dogs.id;
+
+    OUTPUT:
+
+    first_name | last_name  |       breed        |   name
+   ------------+------------+--------------------+-----------
+    Rubeus     | Hagrid     | dachsund chihuahua | Munchkin
+    Marjorie   | Dursley    | great dane         | Marmaduke
+    Sirius     | Black      |                    |
+    Remus      | Lupin      |                    |
+    Albus      | Dumbledore |                    |
+
+2.
+    SELECT cats.name AS "cat", adopters.first_name AS "adopter", cat_adoptions.date
+    FROM cats
+    JOIN cat_adoptions
+    ON cats.id = cat_adoptions.cat_id
+    JOIN adopters
+    ON cat_adoptions.adopter_id = adopters.id;
+
+    OUTPUT:
+
+      cat    | adopter  |    date
+   ----------+----------+------------
+    Azul     | Hermione | 2018-07-27
+    Mushi    | Arabella | 2018-08-21
+    Victoire | Argus    | 2018-08-26
+
+3.
+    SELECT adopters.first_name AS "adopter", dogs.name AS "dog", dogs.breed, dogs.gender
+    FROM adopters
+    JOIN dog_adoptions
+    ON adopters.id != dog_adoptions.adopter_id
+    CROSS JOIN dogs;
+
+    OUTPUT:
+
+    adopter  |    dog    |       breed        | gender
+   ----------+-----------+--------------------+--------
+    Hermione | Boujee    | labrador poodle    | F
+    Hermione | Munchkin  | dachsund chihuahua | F
+    Hermione | Marley    | labrador           | M
+    Hermione | Lassie    | collie shepherd    | F
+    Hermione | Marmaduke | great dane         | M
+    Hermione | Rosco     | rottweiler         | M
+    Arabella | Boujee    | labrador poodle    | F
+    Arabella | Munchkin  | dachsund chihuahua | F
+    Arabella | Marley    | labrador           | M
+    Arabella | Lassie    | collie shepherd    | F
+    Arabella | Marmaduke | great dane         | M
+    Arabella | Rosco     | rottweiler         | M
+
+
+4.
+    SELECT dogs.id, dogs.name AS "dog"
+    FROM dogs
+    LEFT JOIN dog_adoptions
+    ON dogs.id = dog_adoptions.dog_id
+    WHERE dog_adoptions.dog_id IS NULL;
+
+    SELECT cats.id, cats.name AS "cat"
+    FROM cats
+    LEFT JOIN cat_adoptions
+    ON cats.id = cat_adoptions.cat_id
+    WHERE cat_adoptions.cat_id IS NULL;
+
+    OUTPUT:
+
+     id   |    dog
+   -------+-----------
+    10001 | Boujee
+    10002 | Munchkin
+    10004 | Marley
+    10003 | Lassie
+    10006 | Marmaduke
+
+     id |   cat
+    ----+----------
+      2 | Seashell
+      5 | Nala
+
+5.
+    SELECT volunteers.first_name AS "volunteer", dogs.name AS "dog"
+    FROM volunteers
+    FULL OUTER JOIN dogs
+    ON dogs.id = volunteers.foster_dog_id
+    WHERE volunteers.available_to_foster = true OR volunteers.first_name IS NULL;
+
+    OUTPUT:
+
+    volunteer |    dog
+   -----------+-----------
+              | Boujee
+    Rubeus    | Munchkin
+              | Marley
+              | Lassie
+    Marjorie  | Marmaduke
+              | Rosco
+    Sirius    |
+    Remus     |
+
+6.
+    SELECT adopters.first_name, adopters.last_name
+    FROM adopters
+    JOIN dog_adoptions
+    ON adopters.id = dog_adoptions.adopter_id
+    JOIN dogs
+    ON dog_adoptions.dog_id = dogs.id
+    WHERE dogs.name = 'Rosco';
+
+    OUTPUT:
+
+    first_name | last_name
+   ------------+-----------
+    Argus      | Filch

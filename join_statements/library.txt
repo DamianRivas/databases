@@ -1,0 +1,81 @@
+1.
+    SELECT patrons.name, holds.rank
+    FROM patrons
+    JOIN holds
+    ON patrons.id = holds.patron_id
+    JOIN books
+    USING (isbn)
+    WHERE books.title = 'Advanced Potion-Making'
+    ORDER BY holds.rank;
+
+    OUTPUT:
+
+         name      | rank
+   ----------------+------
+    Terry Boot     |    1
+    Cedric Diggory |    2
+
+
+2.
+    SELECT books.title, COUNT(holds.*) AS "holds"
+    FROM books
+    LEFT JOIN holds
+    USING (isbn)
+    GROUP BY(books.title);
+
+    OUTPUT:
+
+                     title                  | holds
+   -----------------------------------------+-------
+    Advanced Potion-Making                  |     2
+    Fantastic Beasts and Where to Find Them |     1
+    Hogwarts: A History                     |     0
+
+
+3.
+    SELECT books.title, AVG(transactions.checked_in_date - transactions.checked_out_date) AS "avg checkout days"
+    FROM books
+    JOIN transactions
+    USING (isbn)
+    GROUP BY(books.title);
+
+    OUTPUT:
+
+                     title                  |   avg checkout days
+   -----------------------------------------+------------------------
+    Advanced Potion-Making                  | 1.00000000000000000000
+    Fantastic Beasts and Where to Find Them |     2.0000000000000000
+    Hogwarts: A History                     | 1.00000000000000000000
+
+
+4.
+    SELECT books.title, MAX(transactions.checked_out_date) AS "last checkout"
+    FROM books
+    JOIN transactions
+    USING (isbn)
+    GROUP BY books.title
+    HAVING MAX(transactions.checked_out_date) < CURRENT_DATE - INTERVAL '5 YEARS';
+
+    OUTPUT:
+
+           title        | last checkout
+   ---------------------+---------------
+    Hogwarts: A History | 2012-09-09
+
+5.
+    SELECT patrons.name, transactions.checked_out_date
+    FROM transactions
+    FULL OUTER JOIN patrons
+    ON patrons.id = transactions.patron_id;
+
+    OUTPUT:
+
+          name       | checked_out_date
+   ------------------+------------------
+    Hermione Granger | 2012-09-09
+    Cho Chang        | 2012-09-09
+    Terry Boot       | 2012-09-09
+    Padma Patil      | 2018-09-03
+    Terry Boot       | 2018-09-07
+    Hermione Granger | 2018-09-07
+    Cedric Diggory   | 2018-09-09
