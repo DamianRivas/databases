@@ -1,0 +1,66 @@
+1.
+    SELECT students.first_name, students.last_name, classes.subject
+    FROM classes
+    JOIN enrollments
+    USING (class_id)
+    JOIN students
+    USING (student_id)
+    WHERE (classes.subject = 'Orbital Mechanics')
+    GROUP BY (students.first_name, students,last_name, classes.subject);
+
+    OUTPUT:
+
+    first_name | last_name |      subject
+   ------------+-----------+-------------------
+    Buzz       | Aldrin    | Orbital Mechanics
+    Damian     | Rivas     | Orbital Mechanics
+    Ralph      | Emerson   | Orbital Mechanics
+
+
+2.
+    SELECT COUNT(enrollments.grade), enrollments.grade, classes.subject
+    FROM enrollments
+    JOIN classes
+    USING (class_id)
+    WHERE class_id = 1
+    GROUP BY (classes.subject, enrollments.grade);
+
+    OUTPUT:
+
+    count | grade |      subject
+   -------+-------+-------------------
+        2 | A     | Orbital Mechanics
+        1 | C     | Orbital Mechanics
+        1 | F     | Orbital Mechanics
+
+
+3.
+    SELECT classes.subject, COUNT(DISTINCT enrollments.student_id)
+    FROM enrollments
+    JOIN classes
+    USING (class_id)
+    GROUP BY (classes.subject);
+
+    OUTPUT:
+
+         subject      | count
+   -------------------+-------
+    Engineering 101   |     1
+    English 1H        |     2
+    Orbital Mechanics |     3
+
+
+4.
+    SELECT classes.subject, COUNT(DISTINCT enrollments.student_id) AS student_count
+    FROM enrollments
+    JOIN classes
+    USING (class_id)
+    GROUP BY (classes.subject)
+    ORDER BY (classes.subject) DESC
+    LIMIT 1;
+
+    OUTPUT:
+
+         subject      | student_count
+   -------------------+---------------
+    Orbital Mechanics |             3

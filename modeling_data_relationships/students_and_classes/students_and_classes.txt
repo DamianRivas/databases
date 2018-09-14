@@ -1,0 +1,48 @@
+Design a data model for students and the classes they have taken.
+The model should include the students' grades for a given class.
+
+1. What classes/entities do we need to model?
+
+  We need to store student and class information, and we need to store the grades
+  a student receives for every class.
+
+2. What fields/attributes will each enitity need?
+  I will assume this database is for a university, so no information on parents is
+  required.
+
+  Student:
+    * first name
+    * last name
+    * id (PK)
+    * student email address
+    * physical address
+    * phone
+
+  Class:
+    * id (PK)
+    * subject
+    * building
+    * room number
+
+  It doesn't make sense to store the grade in either the student model or the class
+  model. Students have a grade for every class. Also, students can enroll into the
+  same class multiple times. So a third enitity, called enrollment, will be used to
+  connect a student to a class.
+
+  Enrollment:
+    * id
+    * grade
+    * student_id (FK)
+    * class_id (FK)
+    * term
+
+3. What data types do we need to use?
+  Integers for the id's as usual. Strings will be used for everything else. Even
+  room numbers to allow for unconventional rooms such as "1A"
+
+4. What relationships exist between entities?
+  There will be a one-to-many relationship between the student and an enrollment,
+  and between the class and enrollment.
+
+5. How should those relationships be represented in tables?
+  See the students_and_classes.sql file.

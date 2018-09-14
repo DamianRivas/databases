@@ -1,0 +1,66 @@
+1.
+    SELECT guests.first_name, guests.last_name
+    FROM guests
+    FULL OUTER JOIN bookings
+    ON guests.id = bookings.guest_id
+    WHERE bookings.check_in_date IS NULL;
+
+    OUTPUT:
+
+    first_name | last_name
+   ------------+-----------
+    John       | Shepard
+
+
+2.
+    SELECT guests.first_name, guests.last_name, bookings.check_in_date, bookings.check_out_date, rooms.floor_number, rooms.room_number
+    FROM bookings
+    JOIN guests
+    ON guests.id = bookings.guest_id
+    JOIN rooms
+    ON bookings.room_id = rooms.id
+    WHERE bookings.check_in_date = CURRENT_DATE - INTERVAL '33 DAYS'
+    AND bookings.check_out_date = CURRENT_DATE - INTERVAL '26 DAYS';
+
+    OUTPUT:
+
+    first_name | last_name | check_in_date | check_out_date | floor_number | room_number
+   ------------+-----------+---------------+----------------+--------------+-------------
+    Jon        | Snow      | 2018-08-12    | 2018-08-19     |            3 |           1
+    Jon        | Snow      | 2018-08-12    | 2018-08-19     |            2 |           2
+
+3.
+    SELECT guests.first_name, guests.last_name, bookings.*
+    FROM bookings
+    JOIN guests
+    ON guests.id = bookings.guest_id
+    WHERE guests.id = 1 AND bookings.room_id = 3;
+
+    OUTPUT:
+
+    first_name | last_name | id | check_in_date | check_out_date | guest_id | room_id
+   ------------+-----------+----+---------------+----------------+----------+---------
+    Rick       | Deckard   |  3 | 2018-08-22    | 2018-08-24     |        1 |       3
+    Rick       | Deckard   |  4 | 2018-08-29    | 2018-08-30     |        1 |       3
+    Rick       | Deckard   |  5 | 2018-09-03    | 2018-09-06     |        1 |       3
+
+4.
+    SELECT COUNT(DISTINCT guests.id) AS "num_guests", rooms.id AS "room_id"
+    FROM bookings
+    JOIN guests
+    ON guests.id = bookings.guest_id
+    RIGHT JOIN rooms
+    ON bookings.room_id = rooms.id
+    GROUP BY (rooms.id);
+
+    OUTPUT:
+
+     num_guests | room_id
+    ------------+---------
+              0 |       1
+              0 |       2
+              1 |       3
+              0 |       4
+              1 |       5
+              2 |       6
+
