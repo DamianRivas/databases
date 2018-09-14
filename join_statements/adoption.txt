@@ -20,13 +20,13 @@
     JOIN cat_adoptions
     ON cats.id = cat_adoptions.cat_id
     JOIN adopters
-    ON cat_adoptions.adopter_id = adopters.id;
+    ON cat_adoptions.adopter_id = adopters.id
+    WHERE cat_adoptions.date > CURRENT_DATE - INTERVAL '31 DAYS';
 
     OUTPUT:
 
       cat    | adopter  |    date
    ----------+----------+------------
-    Azul     | Hermione | 2018-07-27
     Mushi    | Arabella | 2018-08-21
     Victoire | Argus    | 2018-08-26
 

@@ -40,7 +40,7 @@
 
 
 5.
-    SELECT professor.name, compensation.salary, compensation.vacation_days
+    SELECT professor.name AS "professor", compensation.salary AS "money_earned", compensation.vacation_days AS "vacation_time"
     FROM professor AS p
     JOIN compensation AS c
     ON p.id = c.professor_id;
