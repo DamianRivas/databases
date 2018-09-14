@@ -63,19 +63,22 @@
     Hogwarts: A History | 2012-09-09
 
 5.
-    SELECT patrons.name, transactions.checked_out_date
+    SELECT patrons.name, transactions.checked_out_date, books.title AS "book_title"
     FROM transactions
     FULL OUTER JOIN patrons
-    ON patrons.id = transactions.patron_id;
+    ON patrons.id = transactions.patron_id
+    JOIN books
+    ON books.isbn = transactions.isbn
+    ORDER BY (patrons.name);
 
     OUTPUT:
 
-          name       | checked_out_date
-   ------------------+------------------
-    Hermione Granger | 2012-09-09
-    Cho Chang        | 2012-09-09
-    Terry Boot       | 2012-09-09
-    Padma Patil      | 2018-09-03
-    Terry Boot       | 2018-09-07
-    Hermione Granger | 2018-09-07
-    Cedric Diggory   | 2018-09-09
+          name       | checked_out_date |               book_title
+   ------------------+------------------+-----------------------------------------
+    Cedric Diggory   | 2018-09-09       | Fantastic Beasts and Where to Find Them
+    Cho Chang        | 2012-09-09       | Advanced Potion-Making
+    Hermione Granger | 2018-09-07       | Fantastic Beasts and Where to Find Them
+    Hermione Granger | 2012-09-09       | Hogwarts: A History
+    Padma Patil      | 2018-09-03       | Fantastic Beasts and Where to Find Them
+    Terry Boot       | 2018-09-07       | Advanced Potion-Making
+    Terry Boot       | 2012-09-09       | Fantastic Beasts and Where to Find Them
