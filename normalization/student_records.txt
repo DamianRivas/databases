@@ -1,0 +1,51 @@
+First convert the table to 2NF to satisfy the first requirement for 3NF:
+
+Candidate Keys:
+  student_id
+  professor_id
+  id
+
+Dependencies:
+  student_id -> { student_email, student_name }
+  professor_id -> professor_name
+  id -> { grade, subject }
+
+2NF:
+
+  CREATE TABLE students (
+    "student_id" INTEGER,
+    "student_email" VARCHAR(24),
+    "student_name" VARCHAR(9)
+  );
+
+  CREATE TABLE professors (
+    "professor_id" INTEGER,
+    "professor_name" VARCHAR(9),
+  );
+
+  CREATE TABLE course_records (
+    "id" INTEGER,
+    "student_id" INTEGER,
+    "professor_id" INTEGER
+  );
+
+  CREATE TABLE grades (
+    "course_record_id" INTEGER,
+    "subject" VARCHAR(11),
+    "grade" VARCHAR(1)
+  );
+
+3NF:
+  We can say that student_email is dependent on student_name, and student_name
+  dependent on student_id, so student_email is transitively dependent on student_id.
+  So we can split the student table further...
+
+  CREATE TABLE students (
+    "student_id" INTEGER,
+    "student_name" VARCHAR(9)
+  );
+
+  CREATE TABLE student_emails (
+    "student_name" VARCHAR(9),
+    "student_email" VARCHAR(24)
+  );

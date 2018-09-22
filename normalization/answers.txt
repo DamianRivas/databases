@@ -1,0 +1,54 @@
+1.
+  Normalization makes it more efficient to store data because there are less re-
+  writes. So a database with a lot of writes benefits from normalization such
+  as a database for an online store.
+
+2.
+  1NF
+    The first normal form only requires that no columns contain multiple values.
+    So in the online store, instead of having one row represent a cart with multiple
+    items in a column, we can assign an order_id for each item in the cart to point
+    at. Now we can have one item per column.
+
+  2NF
+    The second normal form requires that the table be in first normal form, and all
+    non-key attributes must depend on the primary key alone. In the online store,
+    price would be dependent only on the product_id for example, but not the product
+    category. So this data would have to be split up in two tables.
+
+  3NF
+    The third normal form requires that the database be in 2NF and all transitive
+    functional dependencies of non-prime attributes must not exist. The above example
+    can also be an example of 3NF normalization. Say that the price is dependent on
+    product_id and product_id is dependent on category, then price is transitively
+    dependent on category. This will also require that the table be split in two to
+    satisfy 3NF.
+
+  BCNF
+    The Boyce Codd normal form is like a stricter version of 3NF. For every functional
+    dependency, the column being depended on must be a super key of the table. Suppose
+    the online store had an orders table with order_id, customer_name, customer_address,
+    product_id, and price. We can say that customer_address is dependent on customer_name
+    and price is dependent on product_id. We split up the tables to that order_id,
+    customer_name and product_id are super keys of each table.
+
+3.
+  See student_records.txt
+
+4.
+  Normalizing the data makes it more complicated to query the data. Now if we want to query
+  all the columns we have to chain a few join statements together. This also negatively
+  impacts read performance because we are querying from multiple tables. On the plus side,
+  we have less repitition and better write performance because of it.
+
+5.
+  I would combine the students and student_emails tables again into one. I would also combine
+  the grades and course_records tables into one. This leaves us with three tables to query from,
+  the data is separated in a way that makes sense and there still isn't much repitition.
+
+6.
+  I think normalizing to 3NF is too strict for this scenario. The denormalized scenario from
+  problem 5 makes the most sense to me in the way the data is organized. 3NF may have the least
+  amount of repitition but it overly complicates the database and makes querying from it more
+  difficult. The denormalized scenario limits the amount of joins necessary to two and still
+  has minimal repitition.
