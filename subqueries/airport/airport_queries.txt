@@ -1,0 +1,41 @@
+1.
+    SELECT airplane_model
+    FROM flights
+    WHERE flight_number = ANY
+      (SELECT flight_number
+      FROM transactions
+      WHERE seats_sold > 250
+      AND date > CURRENT_DATE - INTERVAL '1 month');
+
+    OUTPUT:
+
+    airplane_model
+   ----------------
+    Boeing 787
+    Airbus A330
+    Boeing 777
+    Airbus A380
+
+
+2.
+    SELECT origin, destination
+    FROM flights
+    WHERE flight_number = ANY
+      (SELECT flights.flight_number
+      FROM transactions
+      JOIN flights
+      USING (flight_number)
+      JOIN airplanes
+      ON airplanes.model = flights.airplane_model
+      WHERE transactions.seats_sold::FLOAT / airplanes.seat_capacity >= 0.90);
+
+    OUTPUT:
+
+    origin | destination
+   --------+-------------
+    LHR    | JFK
+    SFO    | HKG
+    LHR    | JNB
+
+3.
+

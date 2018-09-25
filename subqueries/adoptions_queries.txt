@@ -1,0 +1,20 @@
+1.
+    SELECT v.first_name, v.last_name, d.name AS "dog"
+    FROM volunteers AS v
+    LEFT JOIN
+      (SELECT id, name FROM dogs) d
+    ON d.id = v.foster_dog_id;
+
+    OUTPUT:
+
+    first_name | last_name  |    dog
+   ------------+------------+-----------
+    Rubeus     | Hagrid     | Munchkin
+    Marjorie   | Dursley    | Marmaduke
+    Sirius     | Black      |
+    Remus      | Lupin      |
+    Albus      | Dumbledore |
+
+
+2.
+  
