@@ -65,7 +65,7 @@
 5.
     SELECT patrons.name, transactions.checked_out_date, books.title AS "book_title"
     FROM transactions
-    FULL OUTER JOIN patrons
+    RIGHT JOIN patrons
     ON patrons.id = transactions.patron_id
     JOIN books
     ON books.isbn = transactions.isbn
