@@ -26,6 +26,10 @@ WHERE flight_number = ANY
 /* Find the total revenue of any flight arriving at or departing from
    Singapore (SIN) */
 
-SELECT total_revenue
+SELECT flight_number, total_revenue
 FROM transactions
+WHERE flight_number IN
+  (SELECT flight_number
+  FROM flights
+  WHERE origin = 'SIN' OR destination = 'SIN');
 

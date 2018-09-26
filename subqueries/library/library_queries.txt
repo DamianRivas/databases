@@ -1,0 +1,87 @@
+1.
+    SELECT patrons.name, holds.rank
+    FROM patrons
+    JOIN holds
+    ON patrons.id = holds.id
+    WHERE holds.isbn IN
+      (SELECT isbn
+      FROM books
+      WHERE title = 'Advanced Potion-Making')
+    ORDER BY holds.rank;
+
+    OUTPUT:
+
+       name     | rank
+   -------------+------
+    Padma Patil |    1
+    Terry Boot  |    2
+
+2.
+    SELECT books.title, COUNT(h.*) AS "holds"
+    FROM books
+    LEFT JOIN
+      (SELECT isbn
+      FROM holds) h
+    USING (isbn)
+    GROUP BY(books.title);
+
+    OUTPUT:
+
+                     title                  | holds
+   -----------------------------------------+-------
+    Advanced Potion-Making                  |     2
+    Fantastic Beasts and Where to Find Them |     1
+    Hogwarts: A History                     |     0
+
+3.
+    SELECT books.title, AVG(t.checked_in_date - t.checked_out_date) AS "avg checkout days"
+    FROM books
+    JOIN
+      (SELECT isbn, checked_out_date, checked_in_date
+      FROM transactions
+      WHERE checked_out_date > CURRENT_DATE - INTERVAL '1 month') t
+    USING (isbn)
+    GROUP BY(books.title);
+
+    OUTPUT:
+
+                     title                  | avg checkout days
+   -----------------------------------------+--------------------
+    Advanced Potion-Making                  |
+    Fantastic Beasts and Where to Find Them | 2.5000000000000000
+
+4.
+    SELECT isbn, title
+    FROM books
+    WHERE isbn NOT IN
+      (SELECT isbn
+      FROM transactions
+      WHERE checked_out_date > CURRENT_DATE - INTERVAL '1 month');
+
+    OUTPUT:
+
+       isbn    |        title
+   ------------+---------------------
+    1840918626 | Hogwarts: A History
+
+5.
+    SELECT patrons.name, b.title AS "checked_out_book"
+    FROM patrons
+    LEFT JOIN
+      (SELECT books.title, transactions.patron_id
+      FROM books
+      JOIN transactions
+      USING (isbn)
+      WHERE transactions.checked_in_date IS NULL) b
+    ON b.patron_id = patrons.id
+    ORDER BY patrons.name;
+
+    OUTPUT:
+
+          name       |            checked_out_book
+   ------------------+-----------------------------------------
+    Cedric Diggory   | Fantastic Beasts and Where to Find Them
+    Cho Chang        |
+    Hermione Granger |
+    Padma Patil      |
+    Terry Boot       | Advanced Potion-Making

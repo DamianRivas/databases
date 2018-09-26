@@ -27,6 +27,20 @@
     * NOT EXISTS
 
 7.
-  Look in adoptions_queries.txt
+  Look in adoptions/adoptions_queries.txt
 
 8.
+  Look in library/library_queries.txt
+
+9.
+  Look in airport/airport_queries.txt
+
+10.
+  In my opinion, the queries from checkpoint 6 are easier to read, but introducing
+  subqueries made some of the queries a lot simpler to write. Having the ability
+  to put a where clause before a JOIN by using a subquery made some of the queries
+  much easier to write. It also makes more sense to use a subquery when you want to
+  select data from onoe data based on conditions in another table.
+
+  Some of the queries were made more complicated by subqueries, though. There are
+  situations when one simple JOIN statement is enough.
