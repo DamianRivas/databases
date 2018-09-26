@@ -1,0 +1,46 @@
+1.
+  A subquery is like a JOIN statement that you can do within the SELECT, FROM,
+  and WHERE clauses, but most commonly done within the WHERE clause. They nest
+  SELECT statements inside another SELECT statement.
+
+2.
+  You can use subqueries inside SELECT, FROM, and WHERE clauses.
+
+3.
+  You want to employ a subquery when you want to retrieve data from the "parent"
+  SELECT statement based on conditions in the "child" SELECT statement.
+
+4.
+  A row constructor is like a function that builds a row with the passed in "arguments"
+  for its member fields.
+
+5.
+  If there are no failures, then the result of the subquery will be NULL.
+
+6.
+  You can use a subquery in the following ways:
+    * EXISTS
+    * IN
+    * NOT IN
+    * ALL
+    * ANY/SOME
+    * NOT EXISTS
+
+7.
+  Look in adoptions/adoptions_queries.txt
+
+8.
+  Look in library/library_queries.txt
+
+9.
+  Look in airport/airport_queries.txt
+
+10.
+  In my opinion, the queries from checkpoint 6 are easier to read, but introducing
+  subqueries made some of the queries a lot simpler to write. Having the ability
+  to put a where clause before a JOIN by using a subquery made some of the queries
+  much easier to write. It also makes more sense to use a subquery when you want to
+  select data from onoe data based on conditions in another table.
+
+  Some of the queries were made more complicated by subqueries, though. There are
+  situations when one simple JOIN statement is enough.

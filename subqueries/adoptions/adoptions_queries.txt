@@ -1,0 +1,105 @@
+1.
+    SELECT v.first_name, v.last_name, d.name AS "dog"
+    FROM volunteers AS v
+    LEFT JOIN
+      (SELECT id, name FROM dogs) d
+    ON d.id = v.foster_dog_id;
+
+    OUTPUT:
+
+    first_name | last_name  |    dog
+   ------------+------------+-----------
+    Rubeus     | Hagrid     | Munchkin
+    Marjorie   | Dursley    | Marmaduke
+    Sirius     | Black      |
+    Remus      | Lupin      |
+    Albus      | Dumbledore |
+
+
+2.
+    SELECT cats.name AS "cat_name", a.first_name, ca.date
+    FROM cats
+    JOIN
+      (SELECT date, cat_id, adopter_id
+      FROM cat_adoptions) ca
+    ON cats.id = ca.cat_id
+    JOIN
+      (SELECT first_name, id
+      FROM adopters) a
+    ON ca.adopter_id = a.id;
+
+    OUTPUT:
+
+    cat_name | first_name |    date
+   ----------+------------+------------
+    Azul     | Hermione   | 2018-08-08
+    Mushi    | Arabella   | 2018-09-02
+    Victoire | Argus      | 2018-09-07
+
+3.
+    SELECT adopters.first_name AS "adopter_name", dogs.name AS "dog_name"
+    FROM adopters
+    CROSS JOIN dogs
+    WHERE adopters.id NOT IN
+      (SELECT adopter_id
+      FROM dog_adoptions)
+    AND dogs.id NOT IN
+      (SELECT dog_id
+      FROM dog_adoptions)
+    ORDER BY adopters.first_name;
+
+    OUTPUT:
+
+    adopter_name | dog_name
+   --------------+-----------
+    Arabella     | Marmaduke
+    Arabella     | Boujee
+    Arabella     | Munchkin
+    Arabella     | Marley
+    Arabella     | Lassie
+    Hermione     | Marmaduke
+    Hermione     | Lassie
+    Hermione     | Munchkin
+    Hermione     | Boujee
+    Hermione     | Marley
+
+4.
+    SELECT id, name AS "dog_name", gender, age
+    FROM dogs
+    WHERE id NOT IN
+      (SELECT dog_id
+      FROM dog_adoptions);
+
+    SELECT id, name AS "cat_name", gender, age
+    FROM cats
+    WHERE id NOT IN
+      (SELECT cat_id
+      FROM cat_adoptions);
+
+    OUTPUT:
+
+     id   | dog_name  | gender | age
+   -------+-----------+--------+-----
+    10001 | Boujee    | F      |   3
+    10002 | Munchkin  | F      |   0
+    10004 | Marley    | M      |   0
+    10003 | Lassie    | F      |   7
+    10006 | Marmaduke | M      |   7
+
+     id | cat_name | gender | age
+    ----+----------+--------+-----
+      2 | Seashell | F      |   7
+      5 | Nala     | F      |   1
+
+5.
+    SELECT first_name, last_name
+    FROM adopters
+    WHERE id IN
+      (SELECT adopter_id
+      FROM dog_adoptions);
+
+    OUTPUT:
+
+    first_name | last_name
+   ------------+-----------
+    Argus      | Filch
