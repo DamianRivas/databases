@@ -13,7 +13,8 @@ SELECT cats.name AS "cat_name", a.first_name, ca.date
 FROM cats
 JOIN
   (SELECT date, cat_id, adopter_id
-  FROM cat_adoptions) ca
+  FROM cat_adoptions
+  WHERE date > CURRENT_DATE - INTERVAL '1 month') ca
 ON cats.id = ca.cat_id
 JOIN
   (SELECT first_name, id
