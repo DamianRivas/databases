@@ -52,4 +52,7 @@ SELECT first_name, last_name
 FROM adopters
 WHERE id IN
   (SELECT adopter_id
-  FROM dog_adoptions);
+  FROM dog_adoptions
+  JOIN dogs
+  ON dog_adoptions.dog_id = dogs.id
+  WHERE dogs.name = 'Rosco');

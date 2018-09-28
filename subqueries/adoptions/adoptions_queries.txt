@@ -21,7 +21,8 @@
     FROM cats
     JOIN
       (SELECT date, cat_id, adopter_id
-      FROM cat_adoptions) ca
+      FROM cat_adoptions
+      WHERE date > CURRENT_DATE - INTERVAL '1 month') ca
     ON cats.id = ca.cat_id
     JOIN
       (SELECT first_name, id
@@ -96,7 +97,10 @@
     FROM adopters
     WHERE id IN
       (SELECT adopter_id
-      FROM dog_adoptions);
+      FROM dog_adoptions
+      JOIN dogs
+      ON dog_adoptions.dog_id = dogs.id
+      WHERE dogs.name = 'Rosco');
 
     OUTPUT:
 
